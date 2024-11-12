@@ -17,7 +17,11 @@ export function ModeToggle() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger
+        asChild
+        className=' border-spacing-1
+        '
+      >
         <Button
           variant='outline'
           size='icon'

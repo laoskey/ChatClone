@@ -3,7 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/them-provider";
-import { ModeToggle } from "@/components/modal-toggle";
+import { cn } from "@/lib/utils";
 
 const inter = Open_Sans({
   subsets: ["latin"],
@@ -25,15 +25,16 @@ export default function RootLayout({
         lang='en'
         suppressHydrationWarning
       >
-        <body className={`${inter.className}`}>
+        <body
+          className={cn(inter.className, "bg-white dark:bg-[#333]")}
+        >
           <ThemeProvider
             attribute='class'
             defaultTheme='dark'
-            enableSystem={false}
+            enableSystem
             storageKey='discord-theme'
           >
             {children}
-            <ModeToggle />
           </ThemeProvider>
         </body>
       </html>
