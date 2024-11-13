@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import FileUpload from "../file-up/FileUpload";
 
 function InitialModal() {
   const [isPending, startTransition] = useTransition();
@@ -70,7 +71,19 @@ function InitialModal() {
           >
             <div className='space-y-8 px-6'>
               <div className='flex items-center justify-center text-center'>
-                TODO:Upload Image
+                <FormField
+                  control={form.control}
+                  name='imageUrl'
+                  render={({ field }) => {
+                    return (
+                      <FormItem>
+                        <FormControl>
+                          <FileUpload />
+                        </FormControl>
+                      </FormItem>
+                    );
+                  }}
+                />
               </div>
               <FormField
                 control={form.control}
