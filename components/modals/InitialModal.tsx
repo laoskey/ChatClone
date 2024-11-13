@@ -3,7 +3,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useEffect, useState, useTransition } from "react";
-
+import axios from "axios";
 import {
   Dialog,
   DialogContent,
@@ -15,6 +15,7 @@ import {
 
 import { formSchema } from "@/lib/Schema";
 
+import { X } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -26,10 +27,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import FileUpload from "../file-up/FileUpload";
+import { useRouter } from "next/navigation";
 
 function InitialModal() {
   const [isPending, startTransition] = useTransition();
   const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true);
@@ -46,7 +49,15 @@ function InitialModal() {
   const isLoding = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log({ values });
+    try {
+      await axios.post("/api/servers", values);
+
+      form.reset();
+      router.refresh();
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (!isMounted) {
@@ -78,7 +89,11 @@ function InitialModal() {
                     return (
                       <FormItem>
                         <FormControl>
-                          <FileUpload />
+                          <FileUpload
+                            endpoint='serverImage'
+                            value={field.value}
+                            onChange={field.onChange}
+                          />
                         </FormControl>
                       </FormItem>
                     );
@@ -96,7 +111,7 @@ function InitialModal() {
                       </FormLabel>
                       <FormControl>
                         <Input
-                          disabled={isPending}
+                          disabled={isLoding}
                           className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
                           placeholder='Enter server name'
                           {...field}
@@ -111,7 +126,7 @@ function InitialModal() {
             <DialogFooter className='bg-gray-100 px-6 py-4 '>
               <Button
                 variant={"primary"}
-                disabled={isPending || isLoding}
+                disabled={isLoding}
                 type='submit'
               >
                 Create
