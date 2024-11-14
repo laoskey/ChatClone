@@ -100,7 +100,7 @@ function InitialModal() {
                 }}
               />
 
-              {/* TODO:implement the imageUpload by other way */}
+              {/* TODO:implement the imageUpload by SupaBase */}
               {/* TODO: OR Fixed the uploading bug*/}
               <FormField
                 control={form.control}

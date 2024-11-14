@@ -48,20 +48,17 @@ function InitialModal() {
 
   const isLoading = form.formState.isSubmitting;
 
-  // const onSubmit = async (values: z.infer<typeof formSchema>) => {
-  //   try {
-  //     console.log({ values });
-  //     await axios.post("api/servers", values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      console.log({ values });
+      await axios.post("api/servers", values);
 
-  //     form.reset();
-  //     router.refresh();
-  //     window.location.reload();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  const onSubmit = (values) => {
-    console.log(values);
+      form.reset();
+      router.refresh();
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (!isMounted) {
