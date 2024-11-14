@@ -6,6 +6,7 @@ import { v4 as uuidV4 } from "uuid";
 
 export async function POST(req: Request) {
   try {
+    console.log({ req });
     const { name, imageUrl } = await req.json();
     const profile = await currentProfile();
 

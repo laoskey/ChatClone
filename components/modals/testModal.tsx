@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import * as z from "zod";
+import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useEffect, useState, useTransition } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -26,8 +24,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import FileUpload from "../file-up/FileUpload";
 import { useRouter } from "next/navigation";
+import { z } from "zod";
 
 function InitialModal() {
   // const [isPending, startTransition] = useTransition();
@@ -49,21 +47,21 @@ function InitialModal() {
   const isLoading = form.formState.isSubmitting;
 
   // const onSubmit = async (values: z.infer<typeof formSchema>) => {
-  //   try {
-  //     console.log({ values });
-  //     await axios.post("api/servers", values);
-
-  //     form.reset();
-  //     router.refresh();
-  //     window.location.reload();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
+  //   console.log(values);
   // };
-  const onSubmit = (values) => {
-    console.log(values);
-  };
 
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      console.log({ values });
+      await axios.post("api/servers", values);
+
+      form.reset();
+      router.refresh();
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   if (!isMounted) {
     return null;
   }
@@ -80,45 +78,42 @@ function InitialModal() {
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className='space-y-8'
-          >
-            <div className='space-y-8 px-6'>
-              {/* <div className='flex items-center justify-center text-center'> */}
-              <FormField
-                control={form.control}
-                name='imageUrl'
-                render={({ field }) => {
-                  return (
-                    <FormItem>
-                      <FormControl>
-                        <FileUpload
-                          endpoint='serverImage'
-                          value={field.value}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  );
-                }}
-              />
-              {/* </div> */}
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className='space-y-8'>
               <FormField
                 control={form.control}
                 name='name'
                 render={({ field }) => {
                   return (
                     <FormItem>
-                      <FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
-                        Server Name
-                      </FormLabel>
+                      <FormLabel>Name</FormLabel>
                       <FormControl>
                         <Input
-                          disabled={isLoading}
-                          className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
-                          placeholder='Enter server name'
                           {...field}
+                          className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                          disabled={isLoading}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
+              />
+
+              {/* TODO:implement the imageUpload by other way */}
+              {/* TODO: OR Fixed the uploading bug*/}
+              <FormField
+                control={form.control}
+                name='imageUrl'
+                render={({ field }) => {
+                  return (
+                    <FormItem>
+                      <FormLabel>ImageUrl</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                          disabled={isLoading}
                         />
                       </FormControl>
                       <FormMessage />
@@ -127,14 +122,9 @@ function InitialModal() {
                 }}
               />
             </div>
-            <DialogFooter className='bg-gray-100 px-6 py-4 '>
-              <Button
-                variant={"primary"}
-                disabled={isLoading}
-                type='submit'
-              >
-                Create
-              </Button>
+
+            <DialogFooter>
+              <Button disabled={isLoading}>Save</Button>
             </DialogFooter>
           </form>
         </Form>

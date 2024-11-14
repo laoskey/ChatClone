@@ -1,9 +1,11 @@
-import InitialModal from "@/components/modals/InitialModal";
+// import InitialModal from "@/components/modals/InitialModal";
+import InitialModal from "@/components/modals/testModal";
 import { db } from "@/lib/db";
 import { initialProfiles } from "@/lib/initial-profiles";
+
 import { redirect } from "next/navigation";
 
-interface SetupPageProps {}
+// interface SetupPageProps {}
 export default async function SetupPage() {
   const profile = await initialProfiles();
   const server = await db.server.findFirst({
@@ -19,5 +21,6 @@ export default async function SetupPage() {
   if (server) {
     return redirect(`/servers/${server.id}`);
   }
+
   return <InitialModal />;
 }

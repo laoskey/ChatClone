@@ -5,6 +5,10 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/them-provider";
 import { cn } from "@/lib/utils";
 
+import { extractRouterConfig } from "uploadthing/server";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { ourFileRouter } from "@/app/api/uploadthing/core";
+
 const inter = Open_Sans({
   subsets: ["latin"],
 });
@@ -34,6 +38,9 @@ export default function RootLayout({
             enableSystem
             storageKey='discord-theme'
           >
+            <NextSSRPlugin
+              routerConfig={extractRouterConfig(ourFileRouter)}
+            />
             {children}
           </ThemeProvider>
         </body>

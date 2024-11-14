@@ -18,7 +18,7 @@ function FileUpload({ onChange, value, endpoint }: FileUploadProps) {
       <div className='relative h-20 w-20'>
         <Image
           fill
-          src={value || "/svgs/dog-breed-svgrepo-com.svg"}
+          src={value}
           alt='Upload'
           className='rounded-full'
         />
@@ -35,8 +35,16 @@ function FileUpload({ onChange, value, endpoint }: FileUploadProps) {
   return (
     <UploadDropzone
       endpoint={endpoint}
-      onClientUploadComplete={(res) => onChange(res?.[0].url)}
+      onUploadBegin={() => {
+        console.log("begin");
+      }}
+      onClientUploadComplete={(res) => {
+        alert("uploaded successfully!");
+
+        onChange(res?.[0].url);
+      }}
       onUploadError={(error: Error) => {
+        alert("error occurred while uploading");
         console.log(error);
       }}
     />
