@@ -1,9 +1,11 @@
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
-import NavigationAcction from "./NavigationAcction";
+import NavigationAcction from "@/components/navigation//NavigationAcction";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import NavigationItem from "./NavigationItem";
+import NavigationItem from "@/components/navigation/NavigationItem";
+import { ModeToggle } from "@/components/modal-toggle";
+import { UserButton } from "@clerk/nextjs";
 
 async function NavigationSIdebar() {
   const profile = await currentProfile();
@@ -40,6 +42,17 @@ async function NavigationSIdebar() {
           );
         })}
       </ScrollArea>
+      <div className='pb-3 mt-auto flex items-center flex-col gap-y-4'>
+        <ModeToggle />
+        <UserButton
+          afterSignOutUrl='/'
+          appearance={{
+            elements: {
+              avatarBox: "h-[3rem] w-[3rem]",
+            },
+          }}
+        />
+      </div>
     </div>
   );
 }
