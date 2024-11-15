@@ -1,5 +1,6 @@
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
+import NavigationAcction from "./NavigationAcction";
 
 async function NavigationSIdebar() {
   const profile = await currentProfile();
