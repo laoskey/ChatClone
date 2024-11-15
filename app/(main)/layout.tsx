@@ -7,7 +7,7 @@ interface MainLayoutProps {
 async function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className='h-full'>
-      <div className='hidden md:flex h-full w-[5rem] z-30 flex-col fixed inset-y-8'>
+      <div className='hidden md:flex h-full w-[5rem] z-30 flex-col fixed '>
         <NavigationSIdebar />
       </div>
       <main className='md:pl-[5rem] h-full'>{children}</main>

@@ -7,7 +7,7 @@ function ServerIdPage() {
 
   return (
     <div className='text-white'>
-      serverIDsssss {searchParams.toString()}
+      serverIDsssss {searchParams.get("serverId")?.toString()}
     </div>
   );
 }
