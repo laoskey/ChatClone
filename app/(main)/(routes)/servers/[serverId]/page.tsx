@@ -1,14 +1,12 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 
 function ServerIdPage() {
-  const searchParams = useSearchParams();
+  const params = useParams();
 
   return (
-    <div className='text-white'>
-      serverIDsssss {searchParams.get("serverId")?.toString()}
-    </div>
+    <div className='text-white'>serverIDsssss {params.serverId}</div>
   );
 }
 
