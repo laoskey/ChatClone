@@ -5,9 +5,9 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/them-provider";
 import { cn } from "@/lib/utils";
 
-import { extractRouterConfig } from "uploadthing/server";
-import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
-import { ourFileRouter } from "@/app/api/uploadthing/core";
+// import { extractRouterConfig } from "uploadthing/server";
+// import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+// import { ourFileRouter } from "@/app/api/uploadthing/core";
 import ModalProvider from "@/components/providers/ModalProvider";
 
 const inter = Open_Sans({
@@ -39,9 +39,9 @@ export default function RootLayout({
             enableSystem
             storageKey='discord-theme'
           >
-            <NextSSRPlugin
+            {/* <NextSSRPlugin
               routerConfig={extractRouterConfig(ourFileRouter)}
-            />
+            /> */}
             <ModalProvider />
             {children}
           </ThemeProvider>

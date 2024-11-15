@@ -42,7 +42,7 @@ function NavigationItem({ id, imageUrl, name }: NavigationItemProps) {
         >
           <Image
             fill
-            src={imageUrl}
+            src={imageUrl || "/svgs/dog-breed-svgrepo-com.svg"}
             alt='Channel'
           />
         </div>

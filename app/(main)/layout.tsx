@@ -7,6 +7,7 @@ interface MainLayoutProps {
 async function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className='h-full'>
+      {/* TODO: the Sidebar responsable css has a bug  that the md:flex could be invalidation*/}
       <div className='hidden md:flex h-full w-[5rem] z-30 flex-col fixed '>
         <NavigationSIdebar />
       </div>
