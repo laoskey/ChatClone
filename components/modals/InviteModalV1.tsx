@@ -45,7 +45,7 @@ function InviteModalV1() {
       );
       console.log({ response });
 
-      onOpen("invite", response.data);
+      onOpen("invite", { server: response.data });
     } catch (error) {
       console.log({ error });
     } finally {
