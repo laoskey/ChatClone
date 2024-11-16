@@ -50,7 +50,10 @@ function ServerHeader({ server, role }: ServerHeaderProps) {
           </DropdownMenuItem>
         )}
         {isAdmin && (
-          <DropdownMenuItem className='t px-3 py-2 text-sm cursor-pointer'>
+          <DropdownMenuItem
+            onClick={() => onOpen("editserver", { server })}
+            className='t px-3 py-2 text-sm cursor-pointer'
+          >
             Server Settings
             <Settings className='h-5 w-5 ml-auto' />
           </DropdownMenuItem>

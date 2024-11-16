@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
       "uploadthing.com",
       "sea1.ingest.uploadthing.com",
       "owaohzxfnovawbdkaobd.supabase.co",
+      "img-s-msn-com.akamaized.net",
+      "gips3.baidu.com",
     ],
   },
 };
