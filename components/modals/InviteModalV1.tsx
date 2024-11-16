@@ -10,10 +10,12 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Check, Copy, RefreshCw } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 function InviteModalV1() {
   const { isOpen, onClose, type } = useModal();
   const isModalOpen = isOpen && type === "invite";
+  const router = useRouter();
 
   return (
     <Dialog
