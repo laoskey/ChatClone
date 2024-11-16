@@ -11,11 +11,47 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Check, Copy, RefreshCw } from "lucide-react";
 import { useRouter } from "next/navigation";
+import useOrigin from "@/lib/hooks/useOrigin";
+import { useState } from "react";
+import axios from "axios";
 
 function InviteModalV1() {
-  const { isOpen, onClose, type } = useModal();
-  const isModalOpen = isOpen && type === "invite";
+  const [copied, SetCopied] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { isOpen, onOpen, onClose, type, data } = useModal();
+  const origin = useOrigin();
   const router = useRouter();
+
+  const isModalOpen = isOpen && type === "invite";
+  const { server } = data;
+
+  const inviteUrl = `${origin}/invite/${server?.inviteCode}`;
+
+  const onCopy = () => {
+    navigator.clipboard.writeText(inviteUrl);
+    SetCopied(true);
+
+    setTimeout(() => {
+      SetCopied(false);
+    }, 1000);
+  };
+
+  const onNew = async () => {
+    try {
+      setIsLoading(true);
+
+      const response = await axios.patch(
+        `/api/servers/${server?.id}/invite-code`
+      );
+      console.log({ response });
+
+      onOpen("invite", response.data);
+    } catch (error) {
+      console.log({ error });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Dialog
@@ -34,25 +70,25 @@ function InviteModalV1() {
           </Label>
           <div className='flex items-center mt-2 gap-x-2'>
             <Input
-              // disabled={isLoading}
+              disabled={isLoading}
               className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
-              // value={inviteUrl}
+              value={inviteUrl}
             />
             <Button
-              // disabled={isLoading}
-              // onClick={onCopy}
+              disabled={isLoading}
+              onClick={onCopy}
               size='icon'
             >
-              {/* {copied ? (
+              {copied ? (
                 <Check className='w-4 h-4' />
               ) : (
                 <Copy className='w-4 h-4' />
-              )} */}
+              )}
             </Button>
           </div>
           <Button
-            // onClick={onNew}
-            // disabled={isLoading}
+            onClick={onNew}
+            disabled={isLoading}
             variant='link'
             size='sm'
             className='text-xs text-zinc-500 mt-4'
