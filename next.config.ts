@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       "owaohzxfnovawbdkaobd.supabase.co",
       "img-s-msn-com.akamaized.net",
       "gips3.baidu.com",
+      "ts4.cn.mm.bing.net",
     ],
   },
 };
