@@ -4,14 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
 
   images: {
-    domains: [
-      "uploadthing.com",
-      "sea1.ingest.uploadthing.com",
-      "owaohzxfnovawbdkaobd.supabase.co",
-      "img-s-msn-com.akamaized.net",
-      "gips3.baidu.com",
-      "ts4.cn.mm.bing.net",
-    ],
+    domains: ["owaohzxfnovawbdkaobd.supabase.co"],
   },
 };
 

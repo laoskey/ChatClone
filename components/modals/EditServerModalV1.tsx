@@ -1,7 +1,9 @@
 "use client";
-import axios from "axios";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
+import { useModal } from "@/lib/hooks/useModalStore";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import {
   Dialog,
   DialogContent,
@@ -25,8 +27,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
-import { useModal } from "@/lib/hooks/useModalStore";
-import { useEffect } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
 
@@ -57,8 +57,7 @@ function EditServerModalV1() {
 
   // TOTO the logic of showing image has bug
   const showImg =
-    server?.imageUrl &&
-    server.imageUrl === form.getValues("imageUrl");
+    server?.imageUrl && server.imageUrl === form.getValues("imageUrl");
 
   // const onSubmit = async (values: z.infer<typeof formSchema>) => {
   //   console.log(values);
@@ -82,46 +81,43 @@ function EditServerModalV1() {
   };
 
   return (
-    <Dialog
-      open={isModalOpen}
-      onOpenChange={handleClose}
-    >
-      <DialogContent className='bg-white text-black p-0 overflow-hidden'>
-        <DialogHeader className='pt-8 px-6'>
-          <DialogTitle className='text-2xl text-center  font-bold'>
+    <Dialog open={isModalOpen} onOpenChange={handleClose}>
+      <DialogContent className="bg-white text-black p-0 overflow-hidden">
+        <DialogHeader className="pt-8 px-6">
+          <DialogTitle className="text-2xl text-center  font-bold">
             Customize your server
           </DialogTitle>
-          <DialogDescription className=' text-center text-zinc-500'>
-            Give your server a personality with a name and an
-            image,You can always change it later
+          <DialogDescription className=" text-center text-zinc-500">
+            Give your server a personality with a name and an image,You can
+            always change it later
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div className='space-y-8 px-10'>
+            <div className="space-y-8 px-10">
               {/* TODO:implement the imageUpload by SupaBase */}
               {/* TODO: OR Fixed the uploading bug*/}
               <FormField
                 control={form.control}
-                name='imageUrl'
+                name="imageUrl"
                 render={({ field }) => {
                   return (
-                    <FormItem className='flex items-center justify-center'>
+                    <FormItem className="flex items-center justify-center">
                       {showImg ? (
-                        <div className='relative h-20 w-20'>
+                        <div className="relative h-20 w-20">
                           <Image
                             fill
                             src={server.imageUrl}
-                            alt='Upload'
-                            className='rounded-full'
+                            alt="Upload"
+                            className="rounded-full"
                           />
                           <button
-                            className='bg-red-600 text-white p-1 rounded-full absolute top-0 right-0 shadow-sm'
-                            type='button'
+                            className="bg-red-600 text-white p-1 rounded-full absolute top-0 right-0 shadow-sm"
+                            type="button"
                             // TODO
                             onClick={() => field.onChange("")}
                           >
-                            <X className='h-4 w-4' />
+                            <X className="h-4 w-4" />
                           </button>
                         </div>
                       ) : (
@@ -130,7 +126,7 @@ function EditServerModalV1() {
                           <FormControl>
                             <Input
                               {...field}
-                              className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                              className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                               disabled={isLoading}
                             />
                           </FormControl>
@@ -144,7 +140,7 @@ function EditServerModalV1() {
               />
               <FormField
                 control={form.control}
-                name='name'
+                name="name"
                 render={({ field }) => {
                   return (
                     <FormItem>
@@ -152,7 +148,7 @@ function EditServerModalV1() {
                       <FormControl>
                         <Input
                           {...field}
-                          className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                          className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                           disabled={isLoading}
                         />
                       </FormControl>
@@ -163,12 +159,8 @@ function EditServerModalV1() {
               />
             </div>
 
-            <DialogFooter className='px-10 mb-4'>
-              <Button
-                disabled={isLoading}
-                variant={"primary"}
-                className='mt-2'
-              >
+            <DialogFooter className="px-10 mb-4">
+              <Button disabled={isLoading} variant={"primary"} className="mt-2">
                 Save
               </Button>
             </DialogFooter>
