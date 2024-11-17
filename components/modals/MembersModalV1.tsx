@@ -32,7 +32,7 @@ function MembersModalV1() {
             Manage Members
           </DialogTitle>
         </DialogHeader>
-        <DialogDescription>{server.members.length} Members</DialogDescription>
+        <DialogDescription>{server?.members.length} Members</DialogDescription>
         <div className="p-6">Hello member</div>
       </DialogContent>
     </Dialog>
