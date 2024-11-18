@@ -1,10 +1,4 @@
 "use client";
-<<<<<<< HEAD
-import { useModal } from "@/lib/hooks/useModalStore";
-import { useRouter } from "next/navigation";
-
-=======
->>>>>>> 7a3f934cf14d78dabd290d879816992c97785cfb
 import {
   Dialog,
   DialogContent,
@@ -12,7 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-<<<<<<< HEAD
+
 import { ServerWithMembersWithProfiles } from "@/lib/types";
 import {
   DropdownMenu,
@@ -37,26 +31,19 @@ import {
 } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import UserAvatar from "../UserAvatar";
-
-function MembersModalV1() {
-  const { isOpen, onOpen, onClose, type, data } = useModal();
-=======
 import { useModal } from "@/lib/hooks/useModalStore";
-import { redirect, useRouter } from "next/navigation";
-import useOrigin from "@/lib/hooks/useOrigin";
-import { ServerWithMembersWithProfiles } from "@/lib/types";
+import { useRouter } from "next/router";
 
 function MembersModalV1() {
   const { isOpen, onOpen, onClose, type, data } = useModal();
-  const origin = useOrigin();
->>>>>>> 7a3f934cf14d78dabd290d879816992c97785cfb
+
   const router = useRouter();
 
   const isModalOpen = isOpen && type === "members";
   const { server } = data as {
     server: ServerWithMembersWithProfiles;
   };
-<<<<<<< HEAD
+
   const roleIconMap = {
     GUEST: null,
     MODERATOR: <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
@@ -146,33 +133,9 @@ function MembersModalV1() {
             </div>
           ))}
         </ScrollArea>
-=======
-  if (!server) {
-    return redirect("/");
-  }
-
-  return (
-    <Dialog
-      open={isModalOpen}
-      onOpenChange={onClose}
-    >
-      <DialogContent className='bg-white text-black p-0 overflow-hidden'>
-        <DialogHeader className='pt-8 px-6'>
-          <DialogTitle className='text-2xl text-center  font-bold'>
-            Manage Members
-          </DialogTitle>
-        </DialogHeader>
-        <DialogDescription>
-          {server.members.length} Members
-        </DialogDescription>
-        <div className='p-6'>Hello member</div>
->>>>>>> 7a3f934cf14d78dabd290d879816992c97785cfb
       </DialogContent>
     </Dialog>
   );
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 7a3f934cf14d78dabd290d879816992c97785cfb
 export default MembersModalV1;
