@@ -32,12 +32,9 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import UserAvatar from "../UserAvatar";
 import { useModal } from "@/lib/hooks/useModalStore";
-import { useRouter } from "next/router";
 
 function MembersModalV1() {
   const { isOpen, onOpen, onClose, type, data } = useModal();
-
-  const router = useRouter();
 
   const isModalOpen = isOpen && type === "members";
   const { server } = data as {
