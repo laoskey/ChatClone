@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+=======
+import {
+  clerkMiddleware,
+  createRouteMatcher,
+} from "@clerk/nextjs/server";
+>>>>>>> 7a3f934cf14d78dabd290d879816992c97785cfb
 
 const isPublicRoute = createRouteMatcher([
   "/sign-in(.*)",
