@@ -21,7 +21,6 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-<<<<<<< HEAD
 }: {
   children: React.ReactNode;
 }) {
@@ -35,29 +34,6 @@ export default function RootLayout({
             enableSystem
             storageKey="discord-theme"
           >
-=======
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <ClerkProvider>
-      <html
-        lang='en'
-        suppressHydrationWarning
-      >
-        <body
-          className={cn(inter.className, "bg-white dark:bg-[#333]")}
-        >
-          <ThemeProvider
-            attribute='class'
-            defaultTheme='dark'
-            enableSystem
-            storageKey='discord-theme'
-          >
-            {/* <NextSSRPlugin
-              routerConfig={extractRouterConfig(ourFileRouter)}
-            /> */}
->>>>>>> 7a3f934cf14d78dabd290d879816992c97785cfb
             <ModalProvider />
             {children}
           </ThemeProvider>
