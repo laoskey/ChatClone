@@ -8,6 +8,7 @@ import MembersModalV1 from "../modals/MembersModalV1";
 
 import { useIsMounted } from "@/lib/hooks/useIsMounted";
 import { CreateChannelModal } from "../modals/CreateChannelModal";
+import { LeaveServerModal } from "../modals/LeaveServerModal";
 
 const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -27,6 +28,7 @@ const ModalProvider = () => {
       <EditServerModalV1 />
       <MembersModalV1 />
       <CreateChannelModal />
+      <LeaveServerModal />
     </>
   );
 };
