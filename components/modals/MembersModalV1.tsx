@@ -52,6 +52,7 @@ function MembersModalV1() {
     ADMIN: <ShieldAlert className="h-4 w-4 text-rose-500" />,
   };
   const router = useRouter();
+
   const onRoleChange = async (memberId: string, role?: MemberRole) => {
     try {
       setLoadingId(memberId);
@@ -69,6 +70,27 @@ function MembersModalV1() {
       onOpen("members", { server: response.data });
     } catch (error) {
       console.log({ error });
+    } finally {
+      setLoadingId("");
+    }
+  };
+
+  const onKick = async (memberId: string) => {
+    try {
+      setLoadingId(memberId);
+      const url = qs.stringifyUrl({
+        url: `/api/members/${memberId}`,
+        query: {
+          serverId: server?.id,
+        },
+      });
+
+      const response = await axios.delete(url);
+
+      router.refresh();
+      onOpen("members", { server: response.data });
+    } catch (error) {
+      console.log(error);
     } finally {
       setLoadingId("");
     }
@@ -143,7 +165,7 @@ function MembersModalV1() {
                         </DropdownMenuSub>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
-                        // onClick={() => onKick(member.id)}
+                          onClick={() => onKick(member.id)}
                         >
                           <Gavel className="h-4 w-4 mr-2" />
                           Kick
