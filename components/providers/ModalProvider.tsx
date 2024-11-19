@@ -7,15 +7,14 @@ import EditServerModalV1 from "../modals/EditServerModalV1";
 import MembersModalV1 from "../modals/MembersModalV1";
 
 import { useIsMounted } from "@/lib/hooks/useIsMounted";
+import { CreateChannelModal } from "../modals/CreateChannelModal";
 
 const ModalProvider = () => {
-
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
 
   if (!isMounted) {
     return null;
@@ -27,9 +26,9 @@ const ModalProvider = () => {
       <InviteModalV1 />
       <EditServerModalV1 />
       <MembersModalV1 />
+      <CreateChannelModal />
     </>
   );
 };
-
 
 export default ModalProvider;
