@@ -22,6 +22,7 @@ export const ServerSection = ({
   channelType,
   server,
 }: ServerSectionProps) => {
+  console.log({ channelType });
   const { onOpen } = useModal();
 
   return (
