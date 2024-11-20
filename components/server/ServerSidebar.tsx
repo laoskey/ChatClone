@@ -11,6 +11,7 @@ import { ServerSearch } from "@/components/server/ServerSearch";
 import { Separator } from "@/components/ui/separator";
 import { ServerSection } from "./ServerSection";
 import { ServerChannel } from "./ServerChannel";
+import { ServerMember } from "./ServerMember";
 
 interface ServerSideBarProps {
   serverId: string;
