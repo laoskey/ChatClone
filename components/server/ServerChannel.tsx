@@ -37,6 +37,7 @@ export const ServerChannel = ({
 
   const onAction = (e: React.MouseEvent, action: ModalType) => {
     e.stopPropagation();
+    // TODO:Implement the Edit/Delete channel func
     onOpen(action, { channel, server });
   };
 

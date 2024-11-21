@@ -23,16 +23,13 @@ async function NavigationSIdebar() {
     },
   });
   return (
-    <div className='space-y-4 flex flex-col items-center h-full text-primary w-full dark:bg-[#1E1F22] py-3'>
+    <div className="space-y-4 flex flex-col items-center h-full text-primary w-full bg-[#e3e5e8] dark:bg-[#1E1F22] py-3">
       <NavigationAcction />
-      <Separator className='h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 max-auto' />
-      <ScrollArea className='flex-1 w-full'>
+      <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700  rounded-md w-10 max-auto" />
+      <ScrollArea className="flex-1 w-full">
         {servers.map((server) => {
           return (
-            <div
-              className='mb-4'
-              key={server.id}
-            >
+            <div className="mb-4" key={server.id}>
               <NavigationItem
                 id={server.id}
                 imageUrl={server.imageUrl}
@@ -42,10 +39,10 @@ async function NavigationSIdebar() {
           );
         })}
       </ScrollArea>
-      <div className='pb-3 mt-auto flex items-center flex-col gap-y-4'>
+      <div className="pb-3 mt-auto flex items-center flex-col gap-y-4">
         <ModeToggle />
         <UserButton
-          afterSignOutUrl='/'
+          afterSignOutUrl="/"
           appearance={{
             elements: {
               avatarBox: "h-[3rem] w-[3rem]",
