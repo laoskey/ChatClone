@@ -3,6 +3,7 @@ import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { ChannelType } from "@prisma/client";
+import ChatHeader from "@/components/chat/ChatHeader";
 
 interface ChannelIdPageProps {
   params: {
@@ -41,7 +42,7 @@ async function ChannelIdPage({ params }: ChannelIdPageProps) {
         serverId={channel.serverId}
         type="channel"
       />
-      {channel.type === ChannelType.TEXT && (
+      {/* {channel.type === ChannelType.TEXT && (
         <>
           <ChatMessages
             member={member}
@@ -73,7 +74,7 @@ async function ChannelIdPage({ params }: ChannelIdPageProps) {
       )}
       {channel.type === ChannelType.VIDEO && (
         <MediaRoom chatId={channel.id} video={true} audio={true} />
-      )}
+      )} */}
     </div>
   );
 }
