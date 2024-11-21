@@ -60,6 +60,8 @@ model Member {
   id String @id @default(uuid())
   role MemberRole @default(GUEST)
 
+  Messages Message[]
+
   profileId String
   profile Profile @relation(fields:[profileId],references:[id],onDelete:Cascade)
  
@@ -97,5 +99,16 @@ model Channel {
 
   @@index([profileId])
   @@index([serverId])
+
+}
+
+model Message {
+  id String @id @default(uuid())
+  content String @db.Text
+
+  fileUrl String ? @db.Text
+
+  memberId String
+  member Member @relation(fields:[memberId],references:[id],onDelete:Cascade)
 
 }
