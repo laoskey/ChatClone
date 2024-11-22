@@ -13,7 +13,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import { formSchema } from "@/lib/Schema";
+import { MessageFileFormSchema } from "@/lib/Schema";
 
 import {
   Form,
@@ -28,31 +28,37 @@ import { Button } from "@/components/ui/button";
 import FileUpload from "../file-up/FileUpload";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/lib/hooks/useModalStore";
+import qs from "query-string";
 
 function MessageFileModal() {
   const router = useRouter();
   const { onClose, isOpen, data, type } = useModal();
+  const { apiUrl, query } = data;
 
   const isModalOpen = isOpen && type === "messageFile";
 
   const form = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(MessageFileFormSchema),
     defaultValues: {
-      name: "",
-      imageUrl: "",
+      fileUrl: "",
     },
   });
 
   const isLoading = form.formState.isSubmitting;
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (
+    values: z.infer<typeof MessageFileFormSchema>
+  ) => {
     try {
-      console.log({ values });
-      await axios.post("api/servers", values);
+      const url = qs.stringifyUrl({
+        url: apiUrl || "",
+        query,
+      });
+      await axios.post(url, { ...values, content: values.fileUrl });
 
       form.reset();
       router.refresh();
-      window.location.reload();
+      handleClose();
     } catch (error) {
       console.log(error);
     }
@@ -68,45 +74,24 @@ function MessageFileModal() {
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center  font-bold">
-            Customize your server
+            Add an attachment
           </DialogTitle>
           <DialogDescription className=" text-center text-zinc-500">
-            Give your server a personality with a name and an image,You can
-            always change it later
+            Send a file as a message
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="space-y-8">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => {
-                  return (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                          disabled={isLoading}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  );
-                }}
-              />
-
+            <div className="space-y-8 px-6">
               {/* TODO:implement the FileUpload by  */}
               {/* TODO: OR Fixed the uploading bug*/}
               <FormField
                 control={form.control}
-                name="imageUrl"
+                name="fileUrl"
                 render={({ field }) => {
                   return (
                     <FormItem>
-                      <FormLabel>ImageUrl</FormLabel>
+                      <FormLabel>File address</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -121,8 +106,14 @@ function MessageFileModal() {
               />
             </div>
 
-            <DialogFooter>
-              <Button disabled={isLoading}>Save</Button>
+            <DialogFooter className="px-4 py-6">
+              <Button
+                disabled={isLoading}
+                variant={"primary"}
+                type="submit"
+              >
+                Send
+              </Button>
             </DialogFooter>
           </form>
         </Form>

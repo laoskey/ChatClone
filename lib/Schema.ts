@@ -5,6 +5,9 @@ export const formSchema = z.object({
   name: z.string().min(1, { message: "Server name is required" }),
   imageUrl: z.string().min(1, { message: "Server image is required" }),
 });
+export const MessageFileFormSchema = z.object({
+  fileUrl: z.string().min(1, { message: "attchment is required" }),
+});
 
 export const ChannelFormSchema = z.object({
   name: z

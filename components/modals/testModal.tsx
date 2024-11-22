@@ -67,22 +67,22 @@ function InitialModal() {
   }
   return (
     <Dialog open>
-      <DialogContent className='bg-white text-black p-0 overflow-hidden'>
-        <DialogHeader className='pt-8 px-6'>
-          <DialogTitle className='text-2xl text-center  font-bold'>
+      <DialogContent className="bg-white text-black p-0 overflow-hidden">
+        <DialogHeader className="pt-8 px-6">
+          <DialogTitle className="text-2xl text-center  font-bold">
             Customize your server
           </DialogTitle>
-          <DialogDescription className=' text-center text-zinc-500'>
-            Give your server a personality with a name and an
-            image,You can always change it later
+          <DialogDescription className=" text-center text-zinc-500">
+            Give your server a personality with a name and an image,You can
+            always change it later
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div className='space-y-8'>
+            <div className="space-y-8">
               <FormField
                 control={form.control}
-                name='name'
+                name="name"
                 render={({ field }) => {
                   return (
                     <FormItem>
@@ -90,7 +90,7 @@ function InitialModal() {
                       <FormControl>
                         <Input
                           {...field}
-                          className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                          className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                           disabled={isLoading}
                         />
                       </FormControl>
@@ -104,7 +104,7 @@ function InitialModal() {
               {/* TODO: OR Fixed the uploading bug*/}
               <FormField
                 control={form.control}
-                name='imageUrl'
+                name="imageUrl"
                 render={({ field }) => {
                   return (
                     <FormItem>
@@ -112,7 +112,7 @@ function InitialModal() {
                       <FormControl>
                         <Input
                           {...field}
-                          className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
+                          className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                           disabled={isLoading}
                         />
                       </FormControl>
@@ -123,8 +123,14 @@ function InitialModal() {
               />
             </div>
 
-            <DialogFooter>
-              <Button disabled={isLoading}>Save</Button>
+            <DialogFooter className="px-4 py-6">
+              <Button
+                disabled={isLoading}
+                variant={"primary"}
+                type="submit"
+              >
+                Save
+              </Button>
             </DialogFooter>
           </form>
         </Form>
