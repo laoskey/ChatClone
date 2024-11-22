@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { ChannelType } from "@prisma/client";
 import ChatHeader from "@/components/chat/ChatHeader";
+import { ChatInput } from "@/components/chat/ChatInput";
 
 interface ChannelIdPageProps {
   params: {
@@ -42,9 +43,9 @@ async function ChannelIdPage({ params }: ChannelIdPageProps) {
         serverId={channel.serverId}
         type="channel"
       />
-      {/* {channel.type === ChannelType.TEXT && (
+      {channel.type === ChannelType.TEXT && (
         <>
-          <ChatMessages
+          {/* <ChatMessages
             member={member}
             name={channel.name}
             chatId={channel.id}
@@ -57,7 +58,7 @@ async function ChannelIdPage({ params }: ChannelIdPageProps) {
             }}
             paramKey="channelId"
             paramValue={channel.id}
-          />
+          /> */}
           <ChatInput
             name={channel.name}
             type="channel"
@@ -69,7 +70,7 @@ async function ChannelIdPage({ params }: ChannelIdPageProps) {
           />
         </>
       )}
-      {channel.type === ChannelType.AUDIO && (
+      {/* {channel.type === ChannelType.AUDIO && (
         <MediaRoom chatId={channel.id} video={false} audio={true} />
       )}
       {channel.type === ChannelType.VIDEO && (
