@@ -34,7 +34,7 @@ export function SocketProvider({ children }: SocketProviderProps) {
     const socketInstance = new (ClientIO as any)(
       process.env.NEXT_PUBLIC_SITE_URL!,
       {
-        path: "/api/soclet/io",
+        path: "/api/socket/io",
         addTrailingSlash: false,
       }
     );

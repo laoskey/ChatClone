@@ -13,7 +13,7 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
   try {
     if (!res.socket.server.io) {
       const path = "/api/socket/io";
-      // const path = "/api/socket";
+
       const httpServer: NetServer = res.socket.server as any;
 
       const io = new ServerIO(httpServer, {
@@ -25,10 +25,9 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
     }
     res.end();
   } catch (error) {
-    console.log("[SOCKET_SERVER]", error);
+    console.log("[SOCKET_IO]", error);
     return null;
   }
 };
 
-// export const socket = io();
 export default ioHandler;
