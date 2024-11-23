@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 
 const MESSAGE_BATCH = 10;
 
-export default async function GET(req: Request) {
+export async function GET(req: Request) {
   try {
     const profile = await currentProfile();
     const { searchParams } = new URL(req.url);
