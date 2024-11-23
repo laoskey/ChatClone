@@ -5,6 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 import { ChannelType } from "@prisma/client";
 import ChatHeader from "@/components/chat/ChatHeader";
 import { ChatInput } from "@/components/chat/ChatInput";
+import ChatMessages from "@/components/chat/ChatMessages";
 
 interface ChannelIdPageProps {
   params: {
@@ -37,33 +38,33 @@ async function ChannelIdPage({ params }: ChannelIdPageProps) {
     redirect("/");
   }
   return (
-    <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
+    <div className='bg-white dark:bg-[#313338] flex flex-col h-full'>
       <ChatHeader
         name={channel.name}
         serverId={channel.serverId}
-        type="channel"
+        type='channel'
       />
       {channel.type === ChannelType.TEXT && (
         <>
-          {/* <ChatMessages
+          <ChatMessages
             member={member}
             name={channel.name}
             chatId={channel.id}
-            type="channel"
-            apiUrl="/api/messages"
-            socketUrl="/api/socket/messages"
+            type='channel'
+            apiUrl='/api/messages'
+            socketUrl='/api/socket/messages'
             socketQuery={{
               channelId: channel.id,
               serverId: channel.serverId,
             }}
-            paramKey="channelId"
+            paramKey='channelId'
             paramValue={channel.id}
-          /> */}
-          <div className="flex-1"></div>
+          />
+
           <ChatInput
             name={channel.name}
-            type="channel"
-            apiUrl="/api/socket/messages"
+            type='channel'
+            apiUrl='/api/socket/messages'
             query={{
               channelId: channel.id,
               serverId: channel.serverId,
