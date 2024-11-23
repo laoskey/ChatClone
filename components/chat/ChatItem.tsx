@@ -127,12 +127,15 @@ function ChatItem({
   const isImage = !isPDF && fileUrl;
   return (
     <div className='relative group flex items-center hover:bg-black/5 p-4 transition w-full'>
-      <div className='group flex gap-x-2 items-start w-full'>
+      <div className='group flex gap-x-2 items-start  w-full'>
         <div
           onClick={onMemberClick}
-          className='cursor-pointer hover:drop-shadow-md transition'
+          className='cursor-pointer hover:drop-shadow-md transition '
         >
-          <UserAvatar src={member.profile.imageUrl} />
+          <UserAvatar
+            src={member.profile.imageUrl}
+            className='h-10 w-10'
+          />
         </div>
         <div className='flex flex-col w-full'>
           <div className='flex items-center gap-x-2'>
@@ -184,7 +187,7 @@ function ChatItem({
           {!fileUrl && !isEditing && (
             <p
               className={cn(
-                "text-sm text-zinc-600 dark:text-zinc-300",
+                "text-sm text-zinc-600 dark:text-zinc-300  py-2 pl-2 ml-1 rounded-lg max-w-[30rem]  bg-green-600",
                 deleted &&
                   "italic text-zinc-500 dark:text-zinc-400 text-xs mt-1"
               )}
