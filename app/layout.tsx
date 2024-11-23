@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 // import { ourFileRouter } from "@/app/api/uploadthing/core";
 import ModalProvider from "@/components/providers/ModalProvider";
 import SocketProvider from "@/components/providers/SocketProvider";
+import QueryProvider from "@/components/providers/QueryProvider";
 
 const inter = Open_Sans({
   subsets: ["latin"],
@@ -27,17 +28,22 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body className={cn(inter.className, "bg-white dark:bg-[#333]")}>
+      <html
+        lang='en'
+        suppressHydrationWarning
+      >
+        <body
+          className={cn(inter.className, "bg-white dark:bg-[#333]")}
+        >
           <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
+            attribute='class'
+            defaultTheme='dark'
             enableSystem
-            storageKey="discord-theme"
+            storageKey='discord-theme'
           >
             <SocketProvider>
               <ModalProvider />
-              {children}
+              <QueryProvider>{children}</QueryProvider>
             </SocketProvider>
           </ThemeProvider>
         </body>
