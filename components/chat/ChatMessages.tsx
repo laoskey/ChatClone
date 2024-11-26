@@ -7,6 +7,7 @@ import { Loader2, ServerCrash } from "lucide-react";
 import { Fragment, useRef, ElementRef } from "react";
 import ChatItem from "./ChatItem";
 import { useChatSocket } from "@/lib/hooks/useChatSocket";
+import { useChatScroll } from "@/lib/hooks/useChatScroll";
 
 const DATE_FORMAT = "d MMM yyy,HH:mm";
 type MessageWithMemberWithProfile = Message & {
@@ -47,6 +48,13 @@ function ChatMessages({
     useChatQuery({ queryKey, paramKey, apiUrl, paramValue });
 
   useChatSocket({ queryKey, addKey, updateKey });
+  useChatScroll({
+    chatRef,
+    bottomRef,
+    loadMore: fetchNextPage,
+    shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
+    count: data?.pages?.[0]?.items?.length ?? 0,
+  });
 
   if (status === "pending") {
     return (
