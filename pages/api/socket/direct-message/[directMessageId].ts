@@ -16,6 +16,8 @@ export default async function handler(
     const profile = await currentProfile(req);
     const { directMessageId, conversationId } = req.query;
     const { content } = req.body;
+    console.log(conversationId);
+    console.log(directMessageId);
 
     if (!profile) {
       return res.status(401).json({ error: "Unauthrized" });
@@ -35,6 +37,8 @@ export default async function handler(
             memberOne: {
               profileId: profile.id,
             },
+          },
+          {
             memberTwo: {
               profileId: profile.id,
             },
@@ -54,9 +58,38 @@ export default async function handler(
         },
       },
     });
+    // const conversation = await db.conversation.findFirst({
+    //   where: {
+    //     id: conversationId as string,
+    //     OR: [
+    //       {
+    //         memberOne: {
+    //           profileId: profile.id,
+    //         },
+    //       },
+    //       {
+    //         memberTwo: {
+    //           profileId: profile.id,
+    //         },
+    //       },
+    //     ],
+    //   },
+    //   include: {
+    //     memberOne: {
+    //       include: {
+    //         profile: true,
+    //       },
+    //     },
+    //     memberTwo: {
+    //       include: {
+    //         profile: true,
+    //       },
+    //     },
+    //   },
+    // });
 
     if (!conversation) {
-      return res.status(404).json("Conversation not found");
+      return res.status(404).json({ error: "Conversation not found" });
     }
 
     const member =
@@ -135,7 +168,7 @@ export default async function handler(
       });
     }
 
-    const updateKey = `chat:${directMessage}:messages:update`;
+    const updateKey = `chat:${conversation.id}:messages:update`;
 
     res?.socket?.server?.io?.emit(updateKey, directMessage);
     return res.status(200).json(directMessage);
