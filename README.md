@@ -1,4 +1,4 @@
-# Discord Clone
+# Chat Clone
 
 This is a Discord clone project built using Next.js, React, and Prisma. It aims to replicate some of the core features of Discord, such as server management, channel creation, member management, and invitation codes.
 
